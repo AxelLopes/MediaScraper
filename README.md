@@ -1,5 +1,5 @@
-**﻿# MediaScraper
-**
+# MediaScraper
+
 
 A powerful web scraping tool for LinkedIn data extraction and analysis, built with Python and Selenium. This project allows you to scrape LinkedIn profiles and posts based on specific keywords, with features for human-like interaction to avoid detection.
 The project includes Docker support, making it easy to containerize and deploy to any cloud platform that supports containers (like AWS ECS, Google Cloud Run, or Azure Container Instances).
