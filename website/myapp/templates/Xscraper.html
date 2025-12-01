@@ -1,0 +1,11 @@
+{% extends "base.html"%}<!-- import the template base and we can override each "block" -->
+{% block content %}
+<H1>To do list</H1>
+<ul>
+    {% for todo in todos%}
+    <li>
+        {{todo.title}}:{% if todo.completed%}Completed{%else%}Not completed{%endif%}
+    </li>
+    {%endfor%}
+</ul>
+{% endblock %}

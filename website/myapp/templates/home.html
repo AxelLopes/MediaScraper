@@ -1,0 +1,98 @@
+{% extends "base.html"%}<!-- import the template base and we can override each "block" -->
+{% block title%}Media Scraper{%endblock%}
+{% block content %}
+
+<style>
+    body {
+        background-color : rgb(54, 54, 54) ;
+        color : #fefefe ;
+        }
+</style>
+
+<div class="container" style="margin-top:100px; text-align:center">
+<!--
+    <form action="/results/" method="post">
+        {% csrf_token %}
+    <input id="keywords" type="text" name="keywords" >
+    <input type="submit" value ="Search">
+    </form>
+-->
+    
+    <input class="search__field" type="text" id="keywords" placeholder="What are we stalking today?">
+    <button id="button-search" class="button-search" onclick="sendKeywords()" >Search</button>
+    
+    
+      
+
+    <p id="result1"></p>
+  </div>
+  
+  
+<div>
+    <h2 id="scraper_results_header"></h2>
+    <!-- Affichage du DataFrame converti en HTML -->
+    <div id="result">{{ df_html|safe }}
+
+
+        
+
+    </div>
+</div>
+  
+  <script>
+    function sendKeywords() {
+        const keywords = document.getElementById('keywords').value;
+        console.log(keywords);
+        document.getElementById('result').textContent = 'Scraping the keyword "' + keywords + '" on Linkedin, please wait...';
+        document.getElementById('scraper_results_header').textContent = 'Raw results';
+        fetch('/send_keywords/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': '{{ csrf_token }}'  // Include CSRF token
+            },
+            body: `keywords=${keywords}`
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.text(); // Attendre le HTML en réponse
+        })
+        .then(html => {
+            document.getElementById('result').innerHTML = html; // Injecter le tableau HTML dans la div
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            document.getElementById('result').textContent = 'An error occurred. Please try again.';
+        });
+    }
+
+
+    function run_script() {
+
+        fetch('/run_script/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': '{{ csrf_token }}'  // Include CSRF token
+            },
+        })
+        .then(response => response.json())
+        //.then(data => {document.getElementById('result').textContent = 'Result: ' + data.result;})
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          document.getElementById('button-search').click();
+        }
+      });
+</script>
+  
+  {% endblock %}
+
+

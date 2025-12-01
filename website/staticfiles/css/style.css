@@ -1,0 +1,128 @@
+
+
+
+table {
+    border-collapse: collapse;
+    width: 100%; /* facultatif, pour adapter à la largeur de l'écran */
+   background-color: #fff;
+}
+
+table th:first-child,
+table td:first-child {
+    display: none;
+}
+
+th{
+  background:#0b0a63;
+  color:#fff;
+  text-align: center;
+}
+
+td {
+    max-width: 150px;
+
+}
+
+/*Personalize data in divs in table*/
+
+.scrollable {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.3s ease;
+  padding: 10px;
+  max-width: 100%; /* Définit la largeur maximale dans l'état normal */
+  height: 55px; /* Définit une hauteur fixe */
+
+
+}
+
+td:hover .scrollable {
+  white-space: normal; /* Permet au texte de s'étendre sur plusieurs lignes */
+  background-color: #0b0a63; /* Optionnel : change le fond pour indiquer l'interaction */
+  color:#fff;
+  border-radius: 25px;
+  position: absolute; /* Peut être nécessaire si vous avez d'autres éléments proches */
+  max-width: 5000px; /* Permet au contenu de s'ajuster à sa taille réelle */
+  overflow: visible;
+  height: auto ;
+  z-index: 10;
+}
+
+
+
+/* CSS for button search  */
+.button-search {
+    background-color: #0b0a63;
+    border: 0;
+    border-radius: 56px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: system-ui,-apple-system,system-ui,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    outline: 0;
+    /*padding: 16px 21px;*/
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: all .3s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    
+  }
+  
+  .button-search:before {
+    background-color: initial;
+    background-image: linear-gradient(#a8a8a8 0, rgba(255, 255, 255, 0) 100%);
+    border-radius: 125px;
+    content: "";
+    height: 55%;
+    left: 4%;
+    opacity: .5;
+    position: absolute;
+    top: 0;
+    transition: all .3s;
+    width: 92%;
+  }
+  
+  .button-search:hover {
+    box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+    transform: scale(1.05);
+  }
+  
+  
+  @media (min-width: 768px) {
+      .button-search {
+        padding: 7px 18px;
+      }
+    }
+
+
+
+/*Input to search keywords to scrape*/
+
+.search__field{
+width:220px;
+border-radius: 5px;
+background: rgb(249, 250, 250);
+border: 1px solid rgb(181, 189, 196);
+font-size: 16px;
+height: 40px;
+line-height: 24px;
+padding: 7px 8px;
+color: rgb(8, 9, 10);
+box-shadow: none;
+}
+.search__field:focus{
+    background-color: #fff;
+    border-color: #3b49df;
+    box-shadow: 1px 1px 0 #3b49df;
+}
+
+
+
+
+

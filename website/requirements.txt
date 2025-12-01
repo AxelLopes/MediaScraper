@@ -1,0 +1,16 @@
+Django==4.1
+selenium==4.15.2
+webdriver_manager==4.0.1
+pandas==2.0.3
+numpy==1.24.4
+spacy==3.7.2
+gensim==4.3.3
+thinc==8.2.5
+lxml==5.3.1
+Pillow==9.2.0
+cryptography==38.0.1
+pyOpenSSL==22.0.0
+tornado==6.2
+toml==0.10.2
+attrs==23.1.0
+importlib_metadata==8.5.0

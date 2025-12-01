@@ -1,0 +1,44 @@
+A ajouter au dockerfile
+
+# Install necessary build dependencies
+RUN apt-get update && apt-get install -y build-essential python3-dev g++
+ENV PATH="D:/Media Scraper/chromedriver-win32(works)/chromedriver.exe"
+# Run the application.
+CMD python manage.py runserver
+
+
+
+RUN SELENIUM EN DOCKER
+docker run -d -p 4444:4444 -p 7900:7900 --shm-size="2g" selenium/standalone-chrome:latest
+docker run -d -p 4444:4444 -p 7900:7900 --shm-size="2g" selenium/standalone-chrome:126.0.6478.182-20250202
+
+THEN
+docker stop selenium-grid
+
+
+
+
+#ALL OF THIS WORKS#
+
+POUR DEPLOYER
+#build
+docker build -t website-server .
+#Tag the image
+docker tag website-server europe-west1-docker.pkg.dev/carbide-canto-368714/django-repo/django-app:latest
+#Push the image
+docker push europe-west1-docker.pkg.dev/carbide-canto-368714/django-repo/django-app:latest
+#List the images
+gcloud artifacts docker images list europe-west1-docker.pkg.dev/carbide-canto-368714/django-repo/django-app
+#Deploy the image
+gcloud run deploy website-server --image=europe-west1-docker.pkg.dev/carbide-canto-368714/django-repo/django-app:latest --region=europe-west1 --platform=managed
+
+
+DEPLOIEMENT SELENIUM
+gcloud run deploy selenium   --image selenium/standalone-chrome:latest   --platform managed   --region europe-west1   --allow-unauthenticated   --port 4444  --set-env-vars "SE_NODE_MAX_SESSIONS=4,SE_NODE_OVERRIDE_MAX_SESSIONS=true"  --memory 2Gi  --cpu 1
+compose doit contenir : 
+environment:
+      - SELENIUM_HOST=<mon selenium service url> (et plus =selenium)
+
+TEST CONTAINER KUBERNETES AVEC SELENIUM
+gcloud container clusters create selenium-cluster --num-nodes=1 --region=europe-west1
+kubectl apply -f https://raw.githubusercontent.com/SeleniumHQ/docker-selenium/trunk/k8s-deployment.yaml
